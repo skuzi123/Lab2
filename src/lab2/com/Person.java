@@ -35,4 +35,24 @@ public class Person {
     public void setJob(String job) {
         this.job = job;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person that = (Person) o;
+
+        if (age != that.age) return false;
+        if (!name.equals(that.name)) return false;
+        return lastName.equals(that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + age;
+        return result;
+    }
 }
