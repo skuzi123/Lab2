@@ -7,23 +7,29 @@ import java.util.TreeSet;
 
 public class SetActions implements CollectionTypes {
 
-    void addHashSetElement(Person person)
+    private static final String SET_MENU =
+            """
+                    Wybierz rodzaj setu, z którego chcesz skorzystać
+                    1.HashSet
+                    2.TreeSet
+                    """;
+    public void addHashSetElement(Person person)
     {
         hashSet.add(person);
     }
-    void addTreeSetElement(Person person)
+    public void addTreeSetElement(Person person)
     {
         treeSet.add(person);
     }
-   void removeHashSetElement(Person person)
+    public void removeHashSetElement(Person person)
    {
        hashSet.remove(person);
    }
-    void removeTreeSetElement(Person person)
+    public void removeTreeSetElement(Person person)
     {
         treeSet.remove(person);
     }
-    void displayHashSet()
+    public void displayHashSet()
     {
         for(Person person : hashSet)
         {
@@ -31,7 +37,7 @@ public class SetActions implements CollectionTypes {
             System.out.println(output);
         }
     }
-    void displayTreeSet()
+    public void displayTreeSet()
     {
         for(Person person  : treeSet)
         {
@@ -40,27 +46,21 @@ public class SetActions implements CollectionTypes {
         }
     }
 
-
+    Scanner s = new Scanner(System.in);
     @Override
     public void actions() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Wybierz rodzaj set, z której chcesz skorzystać");
-        System.out.println("1.HashSet");
-        System.out.println("2.TreeSet");
+
+        System.out.println(SET_MENU);
         int wybor_1=Integer.parseInt(s.nextLine());
         switch(wybor_1)
         {
             case 1:
             {
-                System.out.println("Wybierz operację, którą chcesz wykonać");
-                System.out.println("1.Dodawanie");
-                System.out.println("2.Odejmowanie");
-                System.out.println("3.Wyświetlanie");
+                System.out.println(ACTION_MENU);
                 int wybor_2 = Integer.parseInt(s.nextLine());
 
                 switch(wybor_2)
                 {
-
                     case 1:
                     {
 
@@ -78,16 +78,29 @@ public class SetActions implements CollectionTypes {
                     case 2:
                     {
                         System.out.println("Podaj imie: ");
-                        String name = s.nextLine();
-                        for (Person person: hashSet)
+                        if(hashSet.size()>=1)
                         {
-                            if (person.getName().equals(name))
+                            String name = s.nextLine();
+                            for (Person person: hashSet)
                             {
-                                removeHashSetElement(person);
-                                break;
+                                if (person.getName().equals(name))
+                                {
+                                    removeHashSetElement(person);
+                                    System.out.println("Element zostal usunięty z HashSetu");
+                                    break;
+                                }
+                                else
+                                {
+                                    System.out.println("NIE MA TAKIEGO ELEMENTU W HASHSECIE");
+                                    break;
+                                }
                             }
                         }
-                        System.out.println("Element zostal usunięty z HashSetu");
+                        else{
+                            System.out.println("HASHSET JEST PUSTY");
+                            break;
+                        }
+
                         break;
                     }
                     case 3:
@@ -100,14 +113,14 @@ public class SetActions implements CollectionTypes {
             }
             case 2:
             {
-                int wybor_2 = s.nextInt();
+                System.out.println(ACTION_MENU);
+                int wybor_2 = Integer.parseInt(s.nextLine());
 
                 switch(wybor_2)
                 {
 
                     case 1:
                     {
-
                         System.out.println("Podaj imie: ");
                         String name = s.nextLine();
                         System.out.println("Podaj nazwisko: ");
@@ -115,7 +128,7 @@ public class SetActions implements CollectionTypes {
                         System.out.println("Podaj zawód: ");
                         String job=s.nextLine();
                         Person person = new Person(name,lastName,job);
-                        addHashSetElement(person);
+                        addTreeSetElement(person);
                         System.out.println(person.getName()+" "+person.getLastName()+" "+person.getAge()+" zostal dodany do TreeSetu");
                         break;
                     }
@@ -123,16 +136,29 @@ public class SetActions implements CollectionTypes {
                     {
 
                         System.out.println("Podaj imie: ");
-                        String name = s.nextLine();
-                        for (Person person: treeSet)
+                        if(treeSet.size()>=1)
                         {
-                            if (person.getName().equals(name))
+                            String name = s.nextLine();
+                            for (Person person: treeSet)
                             {
-                                removeTreeSetElement(person);
-                                break;
+                                if (person.getName().equals(name))
+                                {
+                                    removeTreeSetElement(person);
+                                    System.out.println("Element zostal usunięty z TreeSetu");
+                                    break;
+                                }
+                                else
+                                {
+                                    System.out.println("NIE MA TAKIEGO ELEMENTU W TREESECIE");
+                                    break;
+                                }
                             }
                         }
-                        System.out.println("Element zostal usunięty z TreeSetu");
+                        else{
+                            System.out.println("TREESET JEST PUSTY");
+                            break;
+                        }
+
                         break;
                     }
                     case 3:

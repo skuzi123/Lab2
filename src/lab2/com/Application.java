@@ -6,6 +6,15 @@ import java.util.List;
 
 public class Application {
 
+private static final String MENU =
+        """
+                MENU GLOWNE
+                Wybierz kolekcję, z której chcesz skorzystać
+                1.List
+                2.Set
+                3.Map
+                0.Zakończ program
+                """;
     public static void main(String[] args) {
         Application application= new Application();
         application.startLoop();
@@ -20,12 +29,7 @@ public class Application {
         Scanner s = new Scanner(System.in);
         while(true)
         {
-            System.out.println();
-            System.out.println("MENU GLOWNE");
-            System.out.println("Wybierz kolekcję, z której chcesz skorzystać");
-            System.out.println("1.List");
-            System.out.println("2.Set");
-            System.out.println("3.Map");
+            System.out.println(MENU);
             int wybor=Integer.parseInt(s.nextLine());
 
             switch(wybor)
@@ -46,6 +50,10 @@ public class Application {
 
                     mapActions.actions();
                     break;
+                }
+                case 0:
+                {
+                    System.exit(0);
                 }
 
             }

@@ -4,27 +4,32 @@ import java.util.*;
 
 public class ListActions implements CollectionTypes{
 
-
-  void addArrayListElement(Person person)
+private static final String LIST_MENU =
+        """
+                Wybierz rodzaj listy, z której chcesz skorzystać
+                1.ArrayList
+                2.LinkedList
+                """;
+    public void addArrayListElement(Person person)
  {
       arrayList.add(person);
 
   }
-    void addLinkedListElement(Person person)
+    public void addLinkedListElement(Person person)
     {
        linkedList.add(person);
 
     }
 
-    void removeArrayListElement(int index)
+    public void removeArrayListElement(int index)
     {
-        arrayList.remove(index);
+        arrayList.remove(index-1);
     }
-    void removeLinkedListElement(int index)
+    public void removeLinkedListElement(int index)
     {
-        linkedList.remove(index);
+        linkedList.remove(index-1);
     }
-    void displayArrayList()
+    public void displayArrayList()
     {
 
         for(Person person : arrayList)
@@ -34,7 +39,7 @@ public class ListActions implements CollectionTypes{
 
         }
     }
-    void displayLinkedList()
+    public void displayLinkedList()
     {
         for(Person person : linkedList)
         {
@@ -48,18 +53,13 @@ public class ListActions implements CollectionTypes{
     @Override
     public void actions() {
 
-        System.out.println("Wybierz rodzaj listy, z której chcesz skorzystać");
-        System.out.println("1.ArrayList");
-        System.out.println("2.LinkedList");
+        System.out.println(LIST_MENU);
         int wybor_1=Integer.parseInt(s.nextLine());
         switch(wybor_1)
         {
             case 1:
             {
-                System.out.println("Wybierz operację, którą chcesz wykonać");
-                System.out.println("1.Dodawanie");
-                System.out.println("2.Odejmowanie");
-                System.out.println("3.Wyświetlanie");
+                System.out.println(ACTION_MENU);
                 int wybor_2 = Integer.parseInt(s.nextLine());
 
                 switch(wybor_2)
@@ -80,10 +80,22 @@ public class ListActions implements CollectionTypes{
                     }
                     case 2:
                     {
+                        if(arrayList.size()>=1)
+                        {
+                            try{
+                                int index= Integer.parseInt(s.nextLine());
+                                removeArrayListElement(index);
+                                System.out.println("Element o indeksie "+index+ " zostal usunięty z Arraylisty");
+                                break;
+                            }catch(Exception e){
+                                System.out.println("NIE MA TAKIEGO ELEMENTU W ARRAYLISCIE");
+                            }
+                        }
+                        else{
+                            System.out.println("ARRAYLISTA JEST PUSTA");
+                            break;
+                        }
 
-                        int index= Integer.parseInt(s.nextLine());
-                        removeArrayListElement(index);
-                        System.out.println("Element o indeksie "+index+ " zostal usunięty z Arraylisty");
                         break;
                     }
                     case 3:
@@ -96,7 +108,8 @@ public class ListActions implements CollectionTypes{
             }
             case 2:
             {
-                int wybor_2 = s.nextInt();
+                System.out.println(ACTION_MENU);
+                int wybor_2 = Integer.parseInt(s.nextLine());
 
                 switch(wybor_2)
                 {
@@ -118,9 +131,22 @@ public class ListActions implements CollectionTypes{
                     case 2:
                     {
 
-                        int index= Integer.parseInt(s.nextLine());
-                        removeLinkedListElement(index);
-                        System.out.println("Element o indeksie "+index+ " zostal usunięty z Linkedlisty");
+                        if(linkedList.size()>=1)
+                        {
+                            try{
+                                int index= Integer.parseInt(s.nextLine());
+                                removeLinkedListElement(index);
+                                System.out.println("Element o indeksie "+index+ " zostal usunięty z Linkedlisty");
+                                break;
+                            }catch(Exception e){
+                                System.out.println("NIE MA TAKIEGO ELEMENTU W LINKEDLISCIE");
+                            }
+                        }
+                        else{
+                            System.out.println("LINKEDLISTA JEST PUSTA");
+                            break;
+                        }
+
                         break;
                     }
                     case 3:

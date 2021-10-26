@@ -7,25 +7,30 @@ import java.util.TreeMap;
 
 public class MapActions implements CollectionTypes{
 
-
-  void addHashMapElement(Integer key, Person person)
+    private static final String MAP_MENU =
+            """
+                    Wybierz rodzaj mapy, z której chcesz skorzystać
+                    1.HashMap
+                    2.TreeMap
+                    """;
+ public void addHashMapElement(Integer key, Person person)
   {
       hashMap.put(key,person);
   }
-    void addTreeMapElement(Integer key, Person person)
+    public  void addTreeMapElement(Integer key, Person person)
     {
         treeMap.put(key,person);
     }
- void removeHashMapElement(Integer key)
+    public void removeHashMapElement(Integer key)
  {
      hashMap.remove(key);
  }
-    void removeTreeMapElement(Integer key)
+    public  void removeTreeMapElement(Integer key)
     {
         treeMap.remove(key);
     }
 
-    void displayHashMap()
+    public  void displayHashMap()
     {
         for(Person person : hashMap.values())
         {
@@ -33,7 +38,7 @@ public class MapActions implements CollectionTypes{
             System.out.println(output);
         }
     }
-    void displayTreeMap()
+    public void displayTreeMap()
     {
         for(Person person : treeMap.values())
         {
@@ -41,22 +46,17 @@ public class MapActions implements CollectionTypes{
             System.out.println(output);
         }
     }
-
+    Scanner s = new Scanner(System.in);
     @Override
     public void actions() {
-        Scanner s = new Scanner(System.in);
-            System.out.println("Wybierz rodzaj Mapy, z której chcesz skorzystać");
-            System.out.println("1.HashMap");
-            System.out.println("2.TreeMap");
+
+            System.out.println(MAP_MENU);
             int wybor_1=Integer.parseInt(s.nextLine());
             switch(wybor_1)
             {
                 case 1:
                 {
-                    System.out.println("Wybierz operację, którą chcesz wykonać");
-                    System.out.println("1.Dodawanie");
-                    System.out.println("2.Odejmowanie");
-                    System.out.println("3.Wyświetlanie");
+                    System.out.println(ACTION_MENU);
                     int wybor_2 = Integer.parseInt(s.nextLine());
 
                     switch(wybor_2)
@@ -70,7 +70,7 @@ public class MapActions implements CollectionTypes{
                             String lastName=s.nextLine();
                             System.out.println("Podaj zawód: ");
                             String job=s.nextLine();
-                            System.out.println("Podaj klucz: ");
+                            System.out.println("Podaj klucz(LICZBA): ");
                             Integer keys=s.nextInt();
                             Person person = new Person(name,lastName,job);
                             addHashMapElement(keys,person);
@@ -79,10 +79,22 @@ public class MapActions implements CollectionTypes{
                         }
                         case 2:
                         {
-
-                            int key= Integer.parseInt(s.nextLine());
-                            removeHashMapElement(key);
-                            System.out.println("Element o kluczu "+key+" zostal usunięty z HashMapy");
+                            System.out.println("Podaj klucz(LICZBA): ");
+                            if(hashMap.size()>=1)
+                            {
+                                try{
+                                    int key= Integer.parseInt(s.nextLine());
+                                    removeHashMapElement(key);
+                                    System.out.println("Element o kluczu "+key+" zostal usunięty z HashMapy");
+                                    break;
+                                }catch(Exception e){
+                                    System.out.println("NIE MA TAKIEGO ELEMENTU W HASHMAPIE");
+                                }
+                            }
+                            else {
+                                System.out.println("HASHMAPA JEST PUSTA");
+                                break;
+                            }
                             break;
                         }
                         case 3:
@@ -95,7 +107,8 @@ public class MapActions implements CollectionTypes{
                 }
                 case 2:
                 {
-                    int wybor_2 = s.nextInt();
+                    System.out.println(ACTION_MENU);
+                    int wybor_2 = Integer.parseInt(s.nextLine());
 
                     switch(wybor_2)
                     {
@@ -108,7 +121,7 @@ public class MapActions implements CollectionTypes{
                             String lastName=s.nextLine();
                             System.out.println("Podaj zawód: ");
                             String job=s.nextLine();
-                            System.out.println("Podaj klucz: ");
+                            System.out.println("Podaj klucz(LICZBA): ");
                             Integer keys=s.nextInt();
                             Person person = new Person(name,lastName,job);
                             addTreeMapElement(keys,person);
@@ -118,9 +131,22 @@ public class MapActions implements CollectionTypes{
                         case 2:
                         {
 
-                            int key= Integer.parseInt(s.nextLine());
-                            removeTreeMapElement(key);
-                            System.out.println("Element o kluczu "+key+ " zostal usunięty z TreeMapy");
+                            System.out.println("Podaj klucz(LICZBA): ");
+                            if(treeMap.size()>=1)
+                            {
+                                try{
+                                    int key= Integer.parseInt(s.nextLine());
+                                    removeTreeMapElement(key);
+                                    System.out.println("Element o kluczu "+key+" zostal usunięty z TreeMapy");
+                                    break;
+                                }catch(Exception e){
+                                    System.out.println("NIE MA TAKIEGO ELEMENTU W TREEMAPIE");
+                                }
+                            }
+                            else {
+                                System.out.println("TREEMAPA JEST PUSTA");
+                                break;
+                            }
                             break;
                         }
                         case 3:
